@@ -10,6 +10,7 @@
   "dependencies": {
     "@expo-google-fonts/montserrat": "^0.2.0",
     "@react-native-community/slider": "^3.0.3",
+    "@react-native-pure/tag-selector": "^1.0.0",
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
     "expo-font": "~9.2.1",
@@ -20,7 +21,6 @@
     "react-native-fontawesome": "^7.0.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-progress-bar-modest": "^1.0.3",
-    "react-native-tag-select": "^2.0.0",
     "react-native-tags": "^2.2.0",
     "react-native-web": "~0.13.12"
   },
