@@ -65,7 +65,10 @@ export default function App() {
       </Card>
 
       <Card style={styles.card3}>
-        <BottomContentSection sheetAttr={sheetAttr} />
+        <BottomContentSection
+          sheetAttr={sheetAttr}
+          onSheetAttrChange={(result) => setSheetAttr(result)}
+        />
       </Card>
     </KeyboardAwareScrollView>
   );

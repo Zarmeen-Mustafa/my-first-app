@@ -3,18 +3,17 @@ import { StyleSheet, TextInput, Text, View } from "react-native";
 import { COLORS } from "../colors";
 
 export default function Input(props) {
-  const [text, setText] = useState("");
-
   return (
     <View style={styles.tag}>
       <TextInput
         label="Email"
-        value={text}
+        value={props.value}
         style={styles.input}
+        keyboardType="numeric"
         selectionColor={COLORS.white}
-        placeholderTextColor={COLORS.white}
-        placeholder="12"
-        onChangeText={(text) => setText(text)}
+        textBreakStrategy="simple"
+        maxLength={3}
+        onChangeText={(value) => props.onValueChange(value)}
       />
 
       <Text style={styles.unit}>{props.unit}</Text>

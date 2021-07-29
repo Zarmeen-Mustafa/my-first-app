@@ -1,16 +1,36 @@
 import React, { Component, useState } from "react";
 import { View, StyleSheet, TextInput, Text } from "react-native";
-import Slider from "@react-native-community/slider";
 import SliderRow from "../components/sliderRow.js";
 
-export default function bottomContentSection() {
+export default function bottomContentSection(props) {
   return (
     <View style={styles.bottomContainer}>
-      <SliderRow text="Grammage" unit="g" />
+      <SliderRow
+        max={999}
+        min={0}
+        text="Grammage"
+        unit="g"
+        sheetAttr={props.sheetAttr}
+        onSheetAttrChange={props.onSheetAttrChange}
+      />
 
-      <SliderRow text="Width" unit="mm" />
+      <SliderRow
+        max={999}
+        min={0}
+        text="Width"
+        unit="mm"
+        sheetAttr={props.sheetAttr}
+        onSheetAttrChange={props.onSheetAttrChange}
+      />
 
-      <SliderRow text="Length" unit="mm" />
+      <SliderRow
+        max={999}
+        min={0}
+        text="Length"
+        unit="mm"
+        sheetAttr={props.sheetAttr}
+        onSheetAttrChange={props.onSheetAttrChange}
+      />
     </View>
   );
 }
