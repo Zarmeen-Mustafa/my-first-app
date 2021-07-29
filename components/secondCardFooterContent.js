@@ -1,44 +1,19 @@
 import React, { useState } from "react";
-import {
-  FlatList,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { COLORS } from "../colors.js";
 
 const DATA = [
-  {
-    id: "1",
-    title: "A2",
-  },
-  {
-    id: "2",
-    title: "A3",
-  },
-  {
-    id: "3",
-    title: "A4",
-  },
-  {
-    id: "4",
-    title: "A5",
-  },
-  {
-    id: "5",
-    title: "A6",
-  },
-  {
-    id: "6",
-    title: "DIN LANG",
-  },
+  { id: "1", name: "A2", length: 594, width: 420 },
+  { id: "2", name: "A3", length: 297, width: 420 },
+  { id: "3", name: "A4", length: 294, width: 210 },
+  { id: "4", name: "A5", length: 210, width: 148 },
+  { id: "5", name: "DIN LANG", length: 210, width: 99 },
+  { id: "6", name: "Custom", length: 294, width: 210 },
 ];
 
 const Item = ({ item, onPress, textColor }) => (
   <TouchableOpacity onPress={onPress} style={styles.item}>
-    <Text style={[styles.title, textColor]}>{item.title}</Text>
+    <Text style={[styles.name, textColor]}>{item.name}</Text>
   </TouchableOpacity>
 );
 

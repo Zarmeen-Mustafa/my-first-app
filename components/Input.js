@@ -16,6 +16,7 @@ export default function Input(props) {
         placeholder="12"
         onChangeText={(text) => setText(text)}
       />
+
       <Text style={styles.unit}>{props.unit}</Text>
     </View>
   );

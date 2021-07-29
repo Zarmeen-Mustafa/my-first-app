@@ -1,21 +1,13 @@
-import React, { Component, useState } from "react";
-import { View, StyleSheet, Alert, Text } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, Text } from "react-native";
 import CardFooter from "../components/cardFooter";
 import SecondCardFooterContent from "../components/secondCardFooterContent";
 import { COLORS } from "../colors.js";
 import TagSelector from "@react-native-pure/tag-selector";
 
-export default function middleContentSection() {
-  // const data = [
-  //   { id: 1, label: "DIN A" },
-  //   { id: 2, label: "DIN B" },
-  //   { id: 3, label: "DIN C" },
-  //   { id: 4, label: "DIN D" },
-  //   { id: 5, label: "US Formate" },
-  //   { id: 6, label: "JIS B" },
-  // ];
+export default function middleContentSection(props) {
   const [tagState, setTagState] = useState({
-    value: [],
+    value: ["DIN A"],
     dataSource: [
       "DIN A",
       "DIN B",
@@ -24,19 +16,38 @@ export default function middleContentSection() {
       "US Formate",
       "JIS B",
       "Custom",
-      "DIN A1",
-      "DIN B1",
-      "DIN C1",
-      "DIN D1",
-      "US For1mate",
-      "JIS B1",
-      "Custom1",
     ],
   });
+
+  // const paperSize = [
+  //   { name: "A2", length: 594, width: 420 },
+  //   { name: "A3", length: 297, width: 420 },
+  //   { name: "A4", length: 294, width: 210 },
+  //   { name: "A5", length: 210, width: 148 },
+  //   { name: "DIN LANG", length: 210, width: 99 },
+  //   { name: "Custom", length: 294, width: 210 },
+  // ];
+
+  const paperTypes = [
+    { id: "1", name: "DIN A", grammage: 40 },
+    { id: "2", name: "DIN B", grammage: 60 },
+    { id: "3", name: "DIN C", grammage: 80 },
+    { id: "4", name: "DIN D", grammage: 90 },
+    { id: "5", name: "US Formate", grammage: 180 },
+    { id: "6", name: "JIS B", grammage: 120 },
+    { id: "7", name: "Custom", grammage: 10 },
+  ];
+
+  const getGrammageFromName = (value) => {
+    if (value == "Custom") return props.sheetAttr.grammage;
+    else
+      return paperTypes.find((paperType) => paperType.name == value).grammage;
+  };
+
   return (
     <View style={styles.middleContainer}>
       <TagSelector
-        value={tagState.value}
+        value={[props.sheetAttr.type]}
         style={{
           flexWrap: "wrap",
           padding: 20,
@@ -69,58 +80,17 @@ export default function middleContentSection() {
         }}
         onChange={(type, value) => {
           if (type === "select") {
-            setTagState({ ...tagState, value: [value] });
-          }
-          if (type === "unselect") {
-            setTagState({ ...tagState, value: [] });
+            props.onSheetTypeChange({
+              ...props.sheetAttr,
+              grammage: getGrammageFromName(value),
+              type: value,
+            });
           }
         }}
-        dataSource={tagState.dataSource}
+        dataSource={paperTypes.map((paperType) => paperType.name)}
         keyExtractor={(value) => value}
       />
-      {/* <TagSelector
-          maxHeight={70}
-          expandCaptions={["more", "less"]}
-          expdandedContainerStyle={styles.containerExpanded}
-          containerStyle={styles.container}
-          selectedTagStyle={styles.tagSelected}
-          tagStyle={styles.tag}
-          separatorStyle={styles.separator}
-          expandBtnStyle={styles.btnStyle}
-          expandTextStyle={styles.btnText}
-          tags={this.tags}
-          onChange={(selected) => this.setState({ selectedTags: selected })}
-        /> */}
 
-      {/* <TagSelect
-            itemStyleSelected={{
-              backgroundColor: COLORS.card2Text,
-              borderWidth: 0,
-            }}
-            itemLabelStyleSelected={{
-              color: "white",
-            }}
-            itemLabelStyle={{
-              color: COLORS.card2Text,
-              fontFamily: "Montserrat_400Regular",
-              fontWeight: "400",
-              fontSize: 12,
-              lineHeight: 14.63,
-            }}
-            itemStyle={{
-              height: 30,
-              backgroundColor: "white",
-              justifyContent: "center",
-            }}
-            data={data}
-            max={1}
-            ref={(tag) => {
-              this.tag = tag;
-            }}
-            onMaxError={() => {
-              Alert.alert("Ops", "Max reached");
-            }}
-          /> */}
       <CardFooter style={styles.cardFooter}>
         <SecondCardFooterContent />
       </CardFooter>

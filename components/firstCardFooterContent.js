@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { COLORS } from "../colors";
 
-export default function FirstCardFooterContent() {
+export default function FirstCardFooterContent(props) {
   return (
     <View style={styles.footerContainer}>
       <Text style={styles.footerText}>Per Copy</Text>
-      <Text style={styles.weight}>4.65</Text>
+
+      <Text style={styles.weight}>{props.children}</Text>
     </View>
   );
 }
@@ -24,13 +26,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 14.63,
     paddingVertical: 7,
-    color: "white",
+    color: COLORS.white,
   },
   weight: {
     fontFamily: "Montserrat_700Bold",
     fontWeight: "700",
     fontSize: 24,
     lineHeight: 29.26,
-    color: "white",
+    color: COLORS.white,
   },
 });

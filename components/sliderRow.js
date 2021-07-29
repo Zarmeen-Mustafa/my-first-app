@@ -10,8 +10,10 @@ export default function SliderRow(props) {
     <View style={styles.sliderRow}>
       <View style={styles.textRow}>
         <Text style={styles.title}>{props.text}</Text>
+
         <Input unit={props.unit}></Input>
       </View>
+
       <Slider
         style={styles.slider}
         minimumValue={0}

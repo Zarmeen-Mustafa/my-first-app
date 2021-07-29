@@ -1,97 +1,79 @@
-import React, { Component, useState, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, Text, Image, TextInput } from "react-native";
 import { COLORS } from "../colors";
 import CardFooter from "../components/cardFooter";
 import FirstCardFooterContent from "../components/firstCardFooterContent";
+import ImageButton from "../components/imageButton";
 import { IMAGES } from "../Images";
 
-export default function TopContentSection() {
-  const [sheetsState, setSheetsState] = useState({
-    sheets: "0",
-    sheetsImage: IMAGES["paper" + "1"],
-  });
-
+export default function TopContentSection(props) {
+  const [sheetImageURL, setSheetImageURL] = useState(IMAGES.paper1);
+  const { sheetCount } = props;
   useEffect(() => {
-    if (Number(sheetsState.sheets) <= 1) {
-      setSheetsState({ ...sheetsState, sheetsImage: IMAGES["paper" + "1"] });
-    } else if (
-      Number(sheetsState.sheets) >= 2 &&
-      Number(sheetsState.sheets) < 10
-    ) {
-      setSheetsState({ ...sheetsState, sheetsImage: IMAGES["paper" + "2"] });
-    } else if (
-      Number(sheetsState.sheets) >= 10 &&
-      Number(sheetsState.sheets) < 25
-    ) {
-      setSheetsState({ ...sheetsState, sheetsImage: IMAGES["paper" + "3"] });
-    } else if (
-      Number(sheetsState.sheets) >= 25 &&
-      Number(sheetsState.sheets) < 50
-    ) {
-      setSheetsState({ ...sheetsState, sheetsImage: IMAGES["paper" + "4"] });
-    } else if (Number(sheetsState.sheets) >= 50) {
-      setSheetsState({ ...sheetsState, sheetsImage: IMAGES["paper" + "5"] });
+    if (sheetCount <= 1) {
+      setSheetImageURL(IMAGES.paper1);
+    } else if (sheetCount >= 2 && sheetCount < 10) {
+      setSheetImageURL(IMAGES.paper2);
+    } else if (sheetCount >= 10 && sheetCount < 25) {
+      setSheetImageURL(IMAGES.paper3);
+    } else if (sheetCount >= 25 && sheetCount < 50) {
+      setSheetImageURL(IMAGES.paper4);
+    } else if (sheetCount >= 50) {
+      setSheetImageURL(IMAGES.paper5);
     }
-  }, [sheetsState.sheets]);
+  }, [sheetCount]);
 
   const onPressAdd = () => {
-    if (Number(sheetsState.sheets) < 1000) {
-      setSheetsState({
-        ...sheetsState,
-        sheets: (Number(sheetsState.sheets) + 1).toString(),
-      });
+    if (sheetCount < 1000) {
+      props.onSheetsChange(sheetCount + 1);
     }
   };
+
   const onPressMinus = () => {
-    if (Number(sheetsState.sheets) > 0) {
-      setSheetsState({
-        ...sheetsState,
-        sheets: (Number(sheetsState.sheets) - 1).toString(),
-      });
+    if (sheetCount > 0) {
+      props.onSheetsChange(sheetCount - 1);
     }
   };
 
   return (
     <View style={styles.topContainer}>
       <View style={styles.body}>
-        <Image style={styles.paperImage} source={sheetsState.sheetsImage} />
+        <Image style={styles.paperImage} source={sheetImageURL} />
+
         <View style={styles.paperInputContainer}>
-          <TouchableOpacity style={styles.plusContainer} onPress={onPressAdd}>
-            <Image style={styles.paperCountImage} source={IMAGES.plus} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.minusContainer}
+          <ImageButton
+            buttonStyle={styles.plusContainer}
+            onPress={onPressAdd}
+            imageStyle={styles.paperCountImage}
+            imageURL={IMAGES.plus}
+          />
+
+          <ImageButton
+            buttonStyle={styles.minusContainer}
             onPress={onPressMinus}
-          >
-            <Image style={styles.paperCountImage} source={IMAGES.minus} />
-          </TouchableOpacity>
+            imageStyle={styles.paperCountImage}
+            imageURL={IMAGES.minus}
+          />
+
           <View style={styles.paperCountAbsoluteBox}>
             <View style={styles.paperCountContainer}>
               <TextInput
+                selectionColor={COLORS.white}
                 keyboardType="numeric"
-                onChangeText={(input) =>
-                  setSheetsState({
-                    ...sheetsState,
-                    sheets: input,
-                  })
-                }
-                defaultValue={sheetsState.sheets}
+                textBreakStrategy="simple"
+                onChangeText={(input) => props.onSheetsChange(Number(input))}
+                defaultValue={sheetCount.toString()}
                 style={styles.paperCountInput}
               ></TextInput>
+
               <Text style={styles.text}>sheets</Text>
             </View>
           </View>
         </View>
       </View>
+
       <CardFooter style={styles.cardFooter}>
-        <FirstCardFooterContent />
+        <FirstCardFooterContent>{props.sheetWeight}</FirstCardFooterContent>
       </CardFooter>
     </View>
   );

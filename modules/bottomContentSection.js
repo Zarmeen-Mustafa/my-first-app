@@ -7,7 +7,9 @@ export default function bottomContentSection() {
   return (
     <View style={styles.bottomContainer}>
       <SliderRow text="Grammage" unit="g" />
+
       <SliderRow text="Width" unit="mm" />
+
       <SliderRow text="Length" unit="mm" />
     </View>
   );

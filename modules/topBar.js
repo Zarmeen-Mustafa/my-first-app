@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import { IMAGES } from "../Images";
+import ImageButton from "../components/imageButton";
 
 export default class TopBar extends Component {
   render() {
     return (
       <View style={styles.topBar}>
         <Text style={styles.title}>Paper Calculator</Text>
-        <TouchableOpacity>
-          <Image style={styles.icon} source={IMAGES.menu} />
-        </TouchableOpacity>
+
+        <ImageButton imageStyles={styles.icon} imageURL={IMAGES.menu} />
       </View>
     );
   }
