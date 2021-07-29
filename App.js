@@ -17,15 +17,15 @@ import {
 
 export default function App() {
   let [fontsLoaded] = useFonts({ Montserrat_700Bold, Montserrat_400Regular });
-  const [sheetCount, setSheetCount] = useState(1); // rename sheetCount
-  const [sheetWeight, setSheetWeight] = useState(0); // rename sheetCount
+  const [sheetCount, setSheetCount] = useState(1);
+  const [sheetWeight, setSheetWeight] = useState(0);
   const [sheetAttr, setSheetAttr] = useState({
     length: 420,
     width: 594,
-    grammage: 1,
+    grammage: 40,
     type: "DIN A",
-  }); // rename sheetCount
-  // const [sheetCount, setSheetCount] = useState(0); // rename sheetCount
+    size: "A2",
+  });
 
   useEffect(() => {
     setSheetWeight(
@@ -60,12 +60,12 @@ export default function App() {
       <Card style={styles.card2}>
         <MiddleContentSection
           sheetAttr={sheetAttr}
-          onSheetTypeChange={(result) => setSheetAttr(result)}
+          onSheetAttrChange={(result) => setSheetAttr(result)}
         />
       </Card>
 
       <Card style={styles.card3}>
-        <BottomContentSection />
+        <BottomContentSection sheetAttr={sheetAttr} />
       </Card>
     </KeyboardAwareScrollView>
   );
