@@ -33,7 +33,6 @@ export default function App() {
         (1000 * 1000)
       ).toFixed(2)
     );
-    // console.log("dependency1 and dependency2", sheetCount, sheetAttr);
   }, [sheetCount, sheetAttr]);
 
   if (!fontsLoaded) {

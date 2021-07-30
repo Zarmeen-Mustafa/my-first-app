@@ -7,15 +7,13 @@ import { IMAGES } from "../Images";
 
 export default function SliderRow(props) {
   const handleSheetAttr = (value) => {
-    if (props.text == "Width") {
-      console.log(props.text, props.sheetAttr[props.text.toLowerCase()], value);
-
+    if (props.text == "Width")
       props.onSheetAttrChange({
         ...props.sheetAttr,
         width: value,
         size: "Custom",
       });
-    } else if (props.text == "Grammage")
+    else if (props.text == "Grammage")
       props.onSheetAttrChange({
         ...props.sheetAttr,
         grammage: value,
@@ -27,8 +25,6 @@ export default function SliderRow(props) {
         length: value,
         size: "Custom",
       });
-
-    console.log(props.text, props.sheetAttr[props.text.toLowerCase()], value);
   };
 
   return (
