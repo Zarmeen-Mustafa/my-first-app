@@ -1,4 +1,3 @@
-<script src="http://localhost:8097"></script>;
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import AppLoading from "expo-app-loading";
